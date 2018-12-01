@@ -3,3 +3,7 @@ Style/AsciiComments:
 
 Naming/UncommunicativeMethodParamName:
   Enabled: false
+
+Metrics/LineLength:
+  Exclude:
+    - 'features/step_definitions/*.rb'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Array をタプルまたはベクターとして扱うための拡張
-class Array
+# Array をタプルまたはベクターとして扱う
+class Tuple < Array
   def x
     self[0]
   end
@@ -25,4 +25,12 @@ class Array
   def vector?
     w == 0.0
   end
+
+  def +(other)
+    Tuple[x + other.x, y + other.y, z + other.z, w + other.w]
+  end
+end
+
+def tuple(x, y, z, w)
+  Tuple[x, y, z, w]
 end

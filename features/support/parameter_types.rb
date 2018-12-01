@@ -7,7 +7,7 @@ ParameterType(
   name: 'tuple',
   regexp: /tuple.(.+), (.+), (.+), (.+)./,
   type: Array,
-  transformer: ->(x, y, z, w) { [x.to_f, y.to_f, z.to_f, w.to_f] }
+  transformer: ->(x, y, z, w) { tuple(x.to_f, y.to_f, z.to_f, w.to_f) }
 )
 
 ParameterType(

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'ray_tracer/array'
+require 'ray_tracer/tuple'
 
 def point(x, y, z)
-  [x, y, z, 1.0]
+  tuple(x, y, z, 1.0)
 end
