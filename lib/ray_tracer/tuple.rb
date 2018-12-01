@@ -29,6 +29,10 @@ class Tuple < Array
   def +(other)
     Tuple[x + other.x, y + other.y, z + other.z, w + other.w]
   end
+
+  def -(other)
+    Tuple[x - other.x, y - other.y, z - other.z, w - other.w]
+  end
 end
 
 def tuple(x, y, z, w)

@@ -42,3 +42,7 @@ end
 Then('{word} + {word} = {tuple}') do |variable1, variable2, tuple|
   assert_equal tuple, @variables[variable1.to_sym] + @variables[variable2.to_sym]
 end
+
+Then('{word} - {word} = {vector}') do |variable1, variable2, vector|
+  assert_equal vector, @variables[variable1.to_sym] - @variables[variable2.to_sym]
+end
