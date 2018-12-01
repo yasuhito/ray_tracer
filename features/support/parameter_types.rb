@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ray_tracer/array'
+require 'ray_tracer/point'
 
 ParameterType(
   name: 'tuple',
@@ -13,5 +13,5 @@ ParameterType(
   name: 'point',
   regexp: /point.(.+), (.+), (.+)./,
   type: Array,
-  transformer: ->(x, y, z) { [x.to_f, y.to_f, z.to_f, 1.0] }
+  transformer: ->(x, y, z) { point(x.to_f, y.to_f, z.to_f) }
 )

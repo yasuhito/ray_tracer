@@ -1,2 +1,5 @@
 Style/AsciiComments:
   Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
