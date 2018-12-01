@@ -54,3 +54,7 @@ end
 Then('-{word} = {tuple}') do |variable, tuple|
   assert_equal tuple, -@variables[variable.to_sym]
 end
+
+Then('{word} * {float} = {tuple}') do |variable, float, tuple|
+  assert_equal tuple, @variables[variable.to_sym] * float
+end
