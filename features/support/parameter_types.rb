@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'ray_tracer/point'
+require 'ray_tracer/vector'
 
 ParameterType(
   name: 'tuple',
@@ -14,4 +15,11 @@ ParameterType(
   regexp: /point.(.+), (.+), (.+)./,
   type: Array,
   transformer: ->(x, y, z) { point(x.to_f, y.to_f, z.to_f) }
+)
+
+ParameterType(
+  name: 'vector',
+  regexp: /vector.(.+), (.+), (.+)./,
+  type: Array,
+  transformer: ->(x, y, z) { vector(x.to_f, y.to_f, z.to_f) }
 )

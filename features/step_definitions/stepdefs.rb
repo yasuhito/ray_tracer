@@ -33,3 +33,8 @@ end
 Then('{word} = {tuple}') do |variable, tuple|
   assert_equal tuple, @variables[variable.to_sym]
 end
+
+Given('{word} ← {vector}') do |variable, vector|
+  @variables ||= {}
+  @variables[variable.to_sym] = vector
+end
