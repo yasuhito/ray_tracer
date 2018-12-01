@@ -41,6 +41,10 @@ class Tuple < Array
   def *(other)
     Tuple[x * other, y * other, z * other, w * other]
   end
+
+  def /(other)
+    Tuple[x / other, y / other, z / other, w / other]
+  end
 end
 
 def tuple(x, y, z, w)
