@@ -62,3 +62,11 @@ end
 Then("{word} \/ {int} = {tuple}") do |variable, int, tuple|
   assert_equal tuple, @variables[variable.to_sym] / int
 end
+
+Then('{magnitude} = {int}') do |magnitude, int|
+  assert_equal int, magnitude
+end
+
+Then('{magnitude} = √{int}') do |magnitude, int|
+  assert_equal Math.sqrt(int), magnitude
+end

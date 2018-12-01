@@ -45,6 +45,10 @@ class Tuple < Array
   def /(other)
     Tuple[x / other, y / other, z / other, w / other]
   end
+
+  def magnitude
+    Math.sqrt(x**2 + y**2 + z**2 + w**2)
+  end
 end
 
 def tuple(x, y, z, w)

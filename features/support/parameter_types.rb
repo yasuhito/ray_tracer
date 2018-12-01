@@ -6,20 +6,27 @@ require 'ray_tracer/vector'
 ParameterType(
   name: 'tuple',
   regexp: /tuple.(.+), (.+), (.+), (.+)./,
-  type: Array,
+  type: Tuple,
   transformer: ->(x, y, z, w) { tuple(x.to_f, y.to_f, z.to_f, w.to_f) }
 )
 
 ParameterType(
   name: 'point',
   regexp: /point.(.+), (.+), (.+)./,
-  type: Array,
+  type: Tuple,
   transformer: ->(x, y, z) { point(x.to_f, y.to_f, z.to_f) }
 )
 
 ParameterType(
   name: 'vector',
   regexp: /vector.(.+), (.+), (.+)./,
-  type: Array,
+  type: Tuple,
   transformer: ->(x, y, z) { vector(x.to_f, y.to_f, z.to_f) }
+)
+
+ParameterType(
+  name: 'magnitude',
+  regexp: /magnitude.(.+)./,
+  type: Integer,
+  transformer: ->(v) { @variables[v.to_sym].magnitude }
 )
