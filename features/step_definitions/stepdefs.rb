@@ -50,3 +50,7 @@ end
 Then('{word} - {word} = {point}') do |variable1, variable2, point|
   assert_equal point, @variables[variable1.to_sym] - @variables[variable2.to_sym]
 end
+
+Then('-{word} = {tuple}') do |variable, tuple|
+  assert_equal tuple, -@variables[variable.to_sym]
+end
