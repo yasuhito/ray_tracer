@@ -46,3 +46,7 @@ end
 Then('{word} - {word} = {vector}') do |variable1, variable2, vector|
   assert_equal vector, @variables[variable1.to_sym] - @variables[variable2.to_sym]
 end
+
+Then('{word} - {word} = {point}') do |variable1, variable2, point|
+  assert_equal point, @variables[variable1.to_sym] - @variables[variable2.to_sym]
+end
