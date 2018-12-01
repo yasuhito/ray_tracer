@@ -24,3 +24,12 @@ end
 Then('{word} is a vector') do |variable|
   assert @variables[variable.to_sym].vector?
 end
+
+Given('{word} ← {point}') do |variable, point|
+  @variables ||= {}
+  @variables[variable.to_sym] = point
+end
+
+Then('{word} = {tuple}') do |variable, tuple|
+  assert_equal tuple, @variables[variable.to_sym]
+end
