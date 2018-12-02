@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.join(__dir__, '../lib')
+
+require 'ray_tracer/canvas'
+require 'ray_tracer/point'
+require 'ray_tracer/vector'
+
+# 飛ばす物体
+class Projectile
+  attr_reader :position
+  attr_reader :velocity
+
+  def initialize(position, velocity)
+    @position = position
+    @velocity = velocity
+  end
+end
+
+# 重力と風
+class Environment
+  attr_reader :gravity
+  attr_reader :wind
+
+  def initialize(gravity, wind)
+    @gravity = gravity
+    @wind = wind
+  end
+end
+
+# シミュレータ
+class Runner
+  def initialize(environment, projectile, canvas)
+    @environment = environment
+    @projectile = projectile
+    @canvas = canvas
+  end
+
+  # rubocop:disable AbcSize
+  def run
+    loop do
+      x = (@projectile.position.x * 100).to_i
+      y = 400 - (@projectile.position.y * 100).to_i
+      @canvas.write_pixel x, y, Color[1, 0, 0]
+      @projectile = tick
+      break unless @projectile.position.y.positive?
+    end
+  end
+  # rubocop:enable AbcSize
+
+  def to_ppm
+    @canvas.to_ppm
+  end
+
+  private
+
+  def tick
+    position = @projectile.position + @projectile.velocity
+    velocity = @projectile.velocity + @environment.gravity + @environment.wind
+    Projectile.new(position, velocity)
+  end
+end
+
+canvas = Canvas.new(1100, 400)
+projectile = Projectile.new(point(0, 1, 0), vector(1, 1, 0).normalize)
+environment = Environment.new(vector(0, -0.1, 0), vector(-0.01, 0, 0))
+
+runner = Runner.new(environment, projectile, canvas)
+runner.run
+puts runner.to_ppm

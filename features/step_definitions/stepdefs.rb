@@ -167,6 +167,6 @@ When('every pixel of {word} is set to {color}') do |variable, color|
   end
 end
 
-Then("the last character of {word} is a newline") do |variable|
+Then('the last character of {word} is a newline') do |variable|
   assert_equal "\n", @variables[variable.to_sym].split(//).last
 end
