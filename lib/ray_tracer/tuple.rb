@@ -29,11 +29,11 @@ class Tuple < Array
   end
 
   def +(other)
-    Tuple[x + other.x, y + other.y, z + other.z, w + other.w]
+    Tuple.new(zip(other).map { |v1, v2| v1 + v2 })
   end
 
   def -(other)
-    Tuple[x - other.x, y - other.y, z - other.z, w - other.w]
+    Tuple.new(zip(other).map { |v1, v2| v1 - v2 })
   end
 
   def -@
@@ -41,7 +41,7 @@ class Tuple < Array
   end
 
   def *(other)
-    Tuple[x * other, y * other, z * other, w * other]
+    Tuple.new(map { |each| each * other })
   end
 
   def /(other)

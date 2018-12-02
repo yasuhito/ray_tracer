@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'bigdecimal'
+require 'bigdecimal/util'
 require 'ray_tracer/color'
 require 'ray_tracer/point'
 require 'ray_tracer/vector'
@@ -8,21 +10,21 @@ ParameterType(
   name: 'tuple',
   regexp: /tuple.(.+), (.+), (.+), (.+)./,
   type: Tuple,
-  transformer: ->(x, y, z, w) { tuple(x.to_f, y.to_f, z.to_f, w.to_f) }
+  transformer: ->(x, y, z, w) { tuple(x.to_d, y.to_d, z.to_d, w.to_d) }
 )
 
 ParameterType(
   name: 'point',
   regexp: /point.(.+), (.+), (.+)./,
   type: Tuple,
-  transformer: ->(x, y, z) { point(x.to_f, y.to_f, z.to_f) }
+  transformer: ->(x, y, z) { point(x.to_d, y.to_d, z.to_d) }
 )
 
 ParameterType(
   name: 'vector',
   regexp: /vector.(.+), (.+), (.+)./,
   type: Tuple,
-  transformer: ->(x, y, z) { vector(x.to_f, y.to_f, z.to_f) }
+  transformer: ->(x, y, z) { vector(x.to_d, y.to_d, z.to_d) }
 )
 
 ParameterType(
@@ -57,5 +59,5 @@ ParameterType(
   name: 'color',
   regexp: /color.(.+), (.+), (.+)./,
   type: Color,
-  transformer: ->(red, green, blue) { color(red.to_f, green.to_f, blue.to_f) }
+  transformer: ->(red, green, blue) { color(red.to_d, green.to_d, blue.to_d) }
 )
