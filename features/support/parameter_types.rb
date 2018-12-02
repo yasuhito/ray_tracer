@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'ray_tracer/color'
 require 'ray_tracer/point'
 require 'ray_tracer/vector'
 
@@ -50,4 +51,11 @@ ParameterType(
   regexp: /cross.(.+), (.+)./,
   type: Tuple,
   transformer: ->(v1, v2) { @variables[v1.to_sym].cross @variables[v2.to_sym] }
+)
+
+ParameterType(
+  name: 'color',
+  regexp: /color.(.+), (.+), (.+)./,
+  type: Color,
+  transformer: ->(red, green, blue) { color(red.to_f, green.to_f, blue.to_f) }
 )

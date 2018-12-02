@@ -106,3 +106,8 @@ end
 Then('{cross} = {vector}') do |cross, vector|
   assert_equal vector, cross
 end
+
+Given('{word} ← {color}') do |variable, color|
+  @variables ||= {}
+  @variables[variable.to_sym] = color
+end
