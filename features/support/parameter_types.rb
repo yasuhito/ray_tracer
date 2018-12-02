@@ -83,3 +83,10 @@ ParameterType(
   type: Color,
   transformer: ->(canvas, x, y) { pixel_at(@variables[canvas.to_sym], x.to_i, y.to_i) }
 )
+
+ParameterType(
+  name: 'canvas_to_ppm',
+  regexp: /canvas_to_ppm.(.+)./,
+  type: String,
+  transformer: ->(canvas) { canvas_to_ppm(@variables[canvas.to_sym]) }
+)

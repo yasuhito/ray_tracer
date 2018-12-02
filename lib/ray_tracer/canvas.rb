@@ -24,6 +24,14 @@ class Canvas
   def pixel_at(x, y)
     @pixels[y][x]
   end
+
+  def to_ppm
+    <<~PPM
+      P3
+      #{@width} #{@height}
+      255
+    PPM
+  end
 end
 
 def canvas(width, height)
@@ -36,4 +44,8 @@ end
 
 def pixel_at(canvas, x, y)
   canvas.pixel_at x, y
+end
+
+def canvas_to_ppm(canvas)
+  canvas.to_ppm
 end

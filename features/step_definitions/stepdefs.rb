@@ -148,3 +148,12 @@ When('{write_pixel}') { |write_pixel| }
 Then('{pixel_at} = {word}') do |pixel_at, color|
   assert_equal @variables[color.to_sym], pixel_at
 end
+
+When('{word} ← {canvas_to_ppm}') do |variable, canvas_to_ppm|
+  @variables ||= {}
+  @variables[variable.to_sym] = canvas_to_ppm
+end
+
+Then('lines {int}-{int} of {word} are') do |lineno1, lineno2, variable, string|
+  assert_equal string.chomp, @variables[variable.to_sym].lines[(lineno1 - 1)..(lineno2 - 1)].join.chomp
+end
