@@ -28,7 +28,7 @@ class Canvas
   end
 
   def to_ppm
-    header + body
+    header + body + "\n"
   end
 
   private

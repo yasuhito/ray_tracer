@@ -158,11 +158,15 @@ Then('lines {int}-{int} of {word} are') do |lineno1, lineno2, variable, string|
   assert_equal string.chomp, @variables[variable.to_sym].lines[(lineno1 - 1)..(lineno2 - 1)].join.chomp
 end
 
-When("every pixel of {word} is set to {color}") do |variable, color|
+When('every pixel of {word} is set to {color}') do |variable, color|
   canvas = @variables[variable.to_sym]
   0.upto(canvas.width - 1).each do |x|
     0.upto(canvas.height - 1).each do |y|
       write_pixel canvas, x, y, color
     end
   end
+end
+
+Then("the last character of {word} is a newline") do |variable|
+  assert_equal "\n", @variables[variable.to_sym].split(//).last
 end
