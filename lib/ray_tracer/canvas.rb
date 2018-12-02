@@ -45,12 +45,26 @@ class Canvas
     @pixels.map { |row| row_to_ppm(row) }.join("\n")
   end
 
+  # rubocop:disable MethodLength
   def row_to_ppm(row)
-    row.map { |pixel| pixel_to_ppm(pixel) }.join(' ')
+    lines = ['']
+
+    numbers = row.map { |pixel| pixel_to_ppm(pixel) }.flatten
+    numbers.each do |each|
+      if lines.last == ''
+        lines[-1] = each.to_s
+      elsif "#{lines.last} #{each}".length < 70
+        lines[-1] = "#{lines.last} #{each}"
+      else
+        lines << each.to_s
+      end
+    end
+    lines.join("\n")
   end
+  # rubocop:enable MethodLength
 
   def pixel_to_ppm(pixel)
-    (pixel * (MAX_COLOR + 1)).map { |each| scale_color each.to_i }.join(' ')
+    (pixel * (MAX_COLOR + 1)).map { |each| scale_color each.to_i }
   end
 
   def scale_color(color)
