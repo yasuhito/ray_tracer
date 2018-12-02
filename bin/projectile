@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.join(__dir__, '../lib')
+
+require 'ray_tracer/point'
+require 'ray_tracer/vector'
+
+# 飛ばす物体
+class Projectile
+  attr_reader :position
+  attr_reader :velocity
+
+  def initialize(position, velocity)
+    @position = position
+    @velocity = velocity
+  end
+end
+
+# 重力と風
+class Environment
+  attr_reader :gravity
+  attr_reader :wind
+
+  def initialize(gravity, wind)
+    @gravity = gravity
+    @wind = wind
+  end
+end
+
+# シミュレータ
+class Runner
+  def initialize(environment, projectile)
+    @environment = environment
+    @projectile = projectile
+  end
+
+  def run
+    loop do
+      p @projectile
+      @projectile = tick
+      break unless @projectile.position.y.positive?
+    end
+  end
+
+  private
+
+  def tick
+    position = @projectile.position + @projectile.velocity
+    velocity = @projectile.velocity + @environment.gravity + @environment.wind
+    Projectile.new(position, velocity)
+  end
+end
+
+projectile = Projectile.new(point(0, 1, 0), vector(1, 1, 0).normalize)
+environment = Environment.new(vector(0, -0.1, 0), vector(-0.01, 0, 0))
+
+Runner.new(environment, projectile).run
