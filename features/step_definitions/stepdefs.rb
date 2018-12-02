@@ -102,3 +102,7 @@ end
 Then('{dot} = {int}') do |dot, int|
   assert_equal int, dot
 end
+
+Then('{cross} = {vector}') do |cross, vector|
+  assert_equal vector, cross
+end

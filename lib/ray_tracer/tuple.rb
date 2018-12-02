@@ -64,6 +64,15 @@ class Tuple < Array
   def dot(other)
     zip(other).map { |v1, v2| v1 * v2 }.inject(:+)
   end
+
+  # rubocop:disable AbcSize
+  def cross(other)
+    Tuple[y * other.z - z * other.y,
+          z * other.x - x * other.z,
+          x * other.y - y * other.x,
+          0.0]
+  end
+  # rubocop:enable AbcSize
 end
 
 def tuple(x, y, z, w)

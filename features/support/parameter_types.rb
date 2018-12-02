@@ -44,3 +44,10 @@ ParameterType(
   type: Integer,
   transformer: ->(v1, v2) { @variables[v1.to_sym].dot @variables[v2.to_sym] }
 )
+
+ParameterType(
+  name: 'cross',
+  regexp: /cross.(.+), (.+)./,
+  type: Tuple,
+  transformer: ->(v1, v2) { @variables[v1.to_sym].cross @variables[v2.to_sym] }
+)
