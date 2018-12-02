@@ -1,5 +1,20 @@
 # frozen_string_literal: true
 
+require 'minitest/spec'
+
+# Minitest を Cucumber で使うためのクラス
+# https://github.com/cucumber/cucumber/wiki/Using-MiniTest
+class MinitestWorld
+  include Minitest::Assertions
+  attr_accessor :assertions
+
+  def initialize
+    self.assertions = 0
+  end
+end
+
+World { MinitestWorld.new }
+
 Given('{word} ← {tuple}') do |variable, tuple|
   @variables ||= {}
   @variables[variable.to_sym] = tuple
@@ -69,4 +84,17 @@ end
 
 Then('{magnitude} = √{int}') do |magnitude, int|
   assert_equal Math.sqrt(int), magnitude
+end
+
+Then('{normalize} = {vector}') do |normalize, vector|
+  assert_equal vector, normalize
+end
+
+Then('{normalize} = approximately {vector}') do |normalize, vector|
+  assert vector =~ normalize
+end
+
+When('{word} ← {normalize}') do |variable, normalize|
+  @variables ||= {}
+  @variables[variable.to_sym] = normalize
 end

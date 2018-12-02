@@ -30,3 +30,10 @@ ParameterType(
   type: Integer,
   transformer: ->(v) { @variables[v.to_sym].magnitude }
 )
+
+ParameterType(
+  name: 'normalize',
+  regexp: /normalize.(.+)./,
+  type: Tuple,
+  transformer: ->(v) { @variables[v.to_sym].normalize }
+)
