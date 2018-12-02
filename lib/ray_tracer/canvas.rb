@@ -4,6 +4,8 @@ require 'ray_tracer/color'
 
 # レイトレの計算結果を入れるキャンバス
 class Canvas
+  MAX_COLOR = 255
+
   attr_reader :width
   attr_reader :height
 
@@ -26,11 +28,36 @@ class Canvas
   end
 
   def to_ppm
+    header + body
+  end
+
+  private
+
+  def header
     <<~PPM
       P3
       #{@width} #{@height}
-      255
+      #{MAX_COLOR}
     PPM
+  end
+
+  def body
+    @pixels.map { |row| row_to_ppm(row) }.join("\n")
+  end
+
+  def row_to_ppm(row)
+    row.map { |pixel| pixel_to_ppm(pixel) }.join(' ')
+  end
+
+  def pixel_to_ppm(pixel)
+    (pixel * (MAX_COLOR + 1)).map { |each| scale_color each.to_i }.join(' ')
+  end
+
+  def scale_color(color)
+    return MAX_COLOR if color > MAX_COLOR
+    return 0 if color.negative?
+
+    color
   end
 end
 
