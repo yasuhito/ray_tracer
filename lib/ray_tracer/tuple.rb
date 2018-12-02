@@ -60,6 +60,10 @@ class Tuple < Array
   def =~(other)
     (self - other).all? { |each| each.abs < EPSILON }
   end
+
+  def dot(other)
+    zip(other).map { |v1, v2| v1 * v2 }.inject(:+)
+  end
 end
 
 def tuple(x, y, z, w)

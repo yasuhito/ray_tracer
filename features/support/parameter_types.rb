@@ -37,3 +37,10 @@ ParameterType(
   type: Tuple,
   transformer: ->(v) { @variables[v.to_sym].normalize }
 )
+
+ParameterType(
+  name: 'dot',
+  regexp: /dot.(.+), (.+)./,
+  type: Integer,
+  transformer: ->(v1, v2) { @variables[v1.to_sym].dot @variables[v2.to_sym] }
+)

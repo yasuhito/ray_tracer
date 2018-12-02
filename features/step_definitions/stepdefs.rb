@@ -98,3 +98,7 @@ When('{word} ← {normalize}') do |variable, normalize|
   @variables ||= {}
   @variables[variable.to_sym] = normalize
 end
+
+Then('{dot} = {int}') do |dot, int|
+  assert_equal int, dot
+end
