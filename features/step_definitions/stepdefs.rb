@@ -127,3 +127,24 @@ end
 Then('{word} * {word} = {color}') do |variable1, variable2, color|
   assert_equal color, @variables[variable1.to_sym] * @variables[variable2.to_sym]
 end
+
+Given('{word} ← {canvas}') do |variable, canvas|
+  @variables ||= {}
+  @variables[variable.to_sym] = canvas
+end
+
+Then('{word}.{word} = {int}') do |variable, attr, int|
+  assert_equal int, @variables[variable.to_sym].__send__(attr)
+end
+
+Then('every pixel of {word} is {color}') do |variable, color|
+  @variables[variable.to_sym].pixels.all? do |each|
+    assert_equal color, each
+  end
+end
+
+When('{write_pixel}') { |write_pixel| }
+
+Then('{pixel_at} = {word}') do |pixel_at, color|
+  assert_equal @variables[color.to_sym], pixel_at
+end

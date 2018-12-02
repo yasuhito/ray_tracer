@@ -2,6 +2,7 @@
 
 require 'bigdecimal'
 require 'bigdecimal/util'
+require 'ray_tracer/canvas'
 require 'ray_tracer/color'
 require 'ray_tracer/point'
 require 'ray_tracer/vector'
@@ -60,4 +61,25 @@ ParameterType(
   regexp: /color.(.+), (.+), (.+)./,
   type: Color,
   transformer: ->(red, green, blue) { color(red.to_d, green.to_d, blue.to_d) }
+)
+
+ParameterType(
+  name: 'canvas',
+  regexp: /canvas.(.+), (.+)./,
+  type: Canvas,
+  transformer: ->(width, height) { canvas(width.to_i, height.to_i) }
+)
+
+ParameterType(
+  name: 'write_pixel',
+  regexp: /write_pixel.(.+), (.+), (.+), (.+)./,
+  type: Color,
+  transformer: ->(canvas, x, y, color) { write_pixel(@variables[canvas.to_sym], x.to_i, y.to_i, @variables[color.to_sym]) }
+)
+
+ParameterType(
+  name: 'pixel_at',
+  regexp: /pixel_at.(.+), (.+), (.+)./,
+  type: Color,
+  transformer: ->(canvas, x, y) { pixel_at(@variables[canvas.to_sym], x.to_i, y.to_i) }
 )
