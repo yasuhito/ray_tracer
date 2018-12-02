@@ -120,6 +120,10 @@ Then('{word} - {word} = {color}') do |variable1, variable2, color|
   assert_equal color, @variables[variable1.to_sym] - @variables[variable2.to_sym]
 end
 
-Then('{word} * {int} = {color}') do |variable, int, color|
-  assert_equal color, @variables[variable.to_sym] * int
+Then('{word} * {float} = {color}') do |variable, float, color|
+  assert_equal color, @variables[variable.to_sym] * float
+end
+
+Then('{word} * {word} = {color}') do |variable1, variable2, color|
+  assert_equal color, @variables[variable1.to_sym] * @variables[variable2.to_sym]
 end
